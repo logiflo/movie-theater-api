@@ -23,6 +23,12 @@ const seed = async () => {
   const ShowPromises = showsData.map((show) => Show.create(show)); //creates Show and puts it into our Show table
   const UserPromises = usersData.map((user) => User.create(user));
 
+  const users = await User.findAll();
+  const shows = await Show.findAll();
+
+  await users[0].addShows(shows.slice(1,3))
+  await users[1].addShows(shows.slice(4,8))
+
   //Show.create({'name': 'Tony', 'age': 25})
   await Promise.all(ShowPromises); // The Promise.all() method takes an iterable of promises as an input, and returns a single Promise that resolves to an array of the results of the input promises.
   await Promise.all(UserPromises);
