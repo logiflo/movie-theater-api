@@ -5,7 +5,7 @@ const fs = require("fs").promises; //helps us get access to promises when dealin
 //import our database [x]
 //import the model that we are trying to import our data into [x]
 const { db } = require("./db");
-const { Show, User } = require("./models/index");
+const { Show, User } = require("../models");
 
 //write our seed function -> take our json file, create rows with our data into it
 const seed = async () => {
