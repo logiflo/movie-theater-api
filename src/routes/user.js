@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const userRouter = Router();
 
-const { User, Show } = require("../models");
+const { User } = require("../models");
 
-const { getUserById } = require("../middleware");
+const { getUserById, checkRating } = require("../middleware");
 
 userRouter.get("/", async (request, response) => {
   const allUsers = await User.findAll();
@@ -19,12 +19,16 @@ userRouter.get("/:user_id/shows", getUserById, async (request, response) => {
   response.send(userShows);
 });
 
-userRouter.put("/:user_id/shows/:show_id", getUserById, async (request, response) => {
-  const userShows = await request.user.getShows();
-  const showToUpdate = userShows[request.params.show_id - 1];
-  showToUpdate.update(request.body);
-  response.status(201).send(showToUpdate);
-});
-
+userRouter.put(
+  "/:user_id/shows/:show_id",
+  checkRating,
+  getUserById,
+  async (request, response) => {
+    const userShows = await request.user.getShows();
+    const showToUpdate = userShows[request.params.show_id - 1];
+    showToUpdate.update(request.body);
+    response.status(201).send(showToUpdate);
+  }
+);
 
 module.exports = userRouter;

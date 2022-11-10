@@ -1,4 +1,4 @@
-const getUserById = require("./user.middleware");
+const { getUserById, checkRating } = require("./user.middleware");
 const {
   getShowById,
   getShowByGenre,
@@ -7,6 +7,7 @@ const {
 
 module.exports = {
   getUserById,
+  checkRating,
   getShowById,
   getShowByGenre,
   updateStatus,
