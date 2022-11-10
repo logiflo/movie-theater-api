@@ -14,4 +14,14 @@ async function getShowByGenre(request, response, next) {
   next();
 }
 
-module.exports = { getShowById, getShowByGenre };
+async function updateStatus(request, response, next) {
+  if (request.show.status === "cancelled") {
+    request.updateStatus = "on-going";
+  } else {
+    request.updateStatus = "cancelled";
+  }
+
+  next();
+}
+
+module.exports = { getShowById, getShowByGenre, updateStatus };
