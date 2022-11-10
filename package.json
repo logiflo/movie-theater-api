@@ -1,11 +1,11 @@
 {
   "name": "movie_rating_project_solution",
   "version": "1.0.0",
-  "description": "",
+  "description": "Movie Theater Project for Express",
   "main": "db.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +14,9 @@
     "nodemon": "^2.0.15",
     "sequelize": "^6.21.4",
     "sqlite3": "^5.0.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github_personal:logiflo/movie-theater-api.git"
   }
 }
