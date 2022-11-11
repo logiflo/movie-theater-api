@@ -37,7 +37,7 @@ describe("shows endpoint", () => {
           .put(`/shows/${show.id}/watched`)
           .send({ rating: 4 });
 
-        expect(body).toMatchObject({rating: 4});
+        expect(body).toMatchObject({ rating: 4 });
         expect(body).toMatchObject({ title: show.title });
       });
     });
@@ -90,8 +90,9 @@ describe("shows endpoint", () => {
       test("with valid parameters", async () => {
         const show = await Show.findOne();
 
-        const { statusCode } = await request(app)
-          .put(`/shows/${show.id}/update`)
+        const { statusCode } = await request(app).put(
+          `/shows/${show.id}/update`
+        );
 
         expect(statusCode).toBe(201);
       });
@@ -99,8 +100,7 @@ describe("shows endpoint", () => {
       test("responds with application/json", async () => {
         const show = await Show.findOne();
 
-        const { headers } = await request(app)
-          .put(`/shows/${show.id}/update`);
+        const { headers } = await request(app).put(`/shows/${show.id}/update`);
 
         expect(headers["content-type"]).toMatch("application/json");
       });
@@ -108,19 +108,17 @@ describe("shows endpoint", () => {
       test("responds with a show", async () => {
         const show = await Show.findOne();
 
-        const { body } = await request(app)
-          .put(`/shows/${show.id}/update`);
+        const { body } = await request(app).put(`/shows/${show.id}/update`);
 
         const showUpdated = await Show.findByPk(show.id);
 
-        expect(body).toMatchObject({ status: showUpdated.status } );
+        expect(body).toMatchObject({ status: showUpdated.status });
       });
     });
 
     describe("with an invalid :show_id", () => {
       test("fails with Not Found", async () => {
-        const { statusCode } = await request(app)
-          .put("/shows/0/updated");
+        const { statusCode } = await request(app).put("/shows/0/updated");
 
         expect(statusCode).toBe(404);
       });

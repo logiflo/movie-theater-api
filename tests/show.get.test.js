@@ -24,10 +24,14 @@ describe("shows endpoint", () => {
       const { body } = await request(app).get("/shows/");
 
       expect(Array.isArray(body)).toBe(true);
-      expect(body.every(({ title, genre, rating, status }) => title && genre && rating && status));
+      expect(
+        body.every(
+          ({ title, genre, rating, status }) =>
+            title && genre && rating && status
+        )
+      );
     });
   });
-
 
   describe("GET /shows/:show_id", () => {
     describe("with a valid :show_id", () => {
@@ -70,9 +74,11 @@ describe("shows endpoint", () => {
       test("succeeds", async () => {
         const show = await Show.findOne();
 
-        console.log(`/shows/genres/${show.genre}`)
+        console.log(`/shows/genres/${show.genre}`);
 
-        const { statusCode } = await request(app).get(`/shows/genres/${show.genre}`);
+        const { statusCode } = await request(app).get(
+          `/shows/genres/${show.genre}`
+        );
 
         expect(statusCode).toBe(200);
       });
@@ -80,7 +86,9 @@ describe("shows endpoint", () => {
       test("responds with application/json", async () => {
         const show = await Show.findOne();
 
-        const { headers } = await request(app).get(`/shows/genres/${show.genre}`);
+        const { headers } = await request(app).get(
+          `/shows/genres/${show.genre}`
+        );
 
         expect(headers["content-type"]).toMatch("application/json");
       });

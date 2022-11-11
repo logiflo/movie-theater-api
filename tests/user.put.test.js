@@ -40,8 +40,10 @@ describe("users endpoint", () => {
           .put(`/users/${user.id}/shows/${userShows.length}`)
           .send({ rating: 4 });
 
-        expect(body).toMatchObject({rating: 4});
-        expect(body).toMatchObject({ title: userShows[userShows.length - 1].title });
+        expect(body).toMatchObject({ rating: 4 });
+        expect(body).toMatchObject({
+          title: userShows[userShows.length - 1].title,
+        });
       });
     });
 
@@ -97,7 +99,7 @@ describe("users endpoint", () => {
 
         const { statusCode } = await request(app)
           .put(`/users/${user.id}/shows/${userShows.length + 1}`)
-          .send({ title: "title", genre:"Drama", status: "cancelled" });
+          .send({ title: "title", genre: "Drama", status: "cancelled" });
 
         expect(statusCode).toBe(201);
       });
@@ -108,7 +110,7 @@ describe("users endpoint", () => {
 
         const { statusCode } = await request(app)
           .put(`/users/${user.id}/shows/${userShows.length + 1}`)
-          .send({ genre:"Drama", status: "cancelled" });
+          .send({ genre: "Drama", status: "cancelled" });
 
         expect(statusCode).toBe(400);
       });
@@ -130,7 +132,7 @@ describe("users endpoint", () => {
 
         const { statusCode } = await request(app)
           .put(`/users/${user.id}/shows/${userShows.length + 1}`)
-          .send({ title: "title", genre:"Drama" });
+          .send({ title: "title", genre: "Drama" });
 
         expect(statusCode).toBe(400);
       });
@@ -141,12 +143,10 @@ describe("users endpoint", () => {
 
         const { statusCode } = await request(app)
           .put(`/users/${user.id}/shows/${userShows.length + 1}`)
-          .send({ title: "title", genre:"Drama", status: "hh" });
+          .send({ title: "title", genre: "Drama", status: "hh" });
 
         expect(statusCode).toBe(400);
       });
     });
-
-
   });
 });

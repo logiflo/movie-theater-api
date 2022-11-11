@@ -8,8 +8,7 @@ describe("shows endpoint", () => {
     await seed();
   });
 
-
-  // describe("DELETE /shows/:show_id", () => {
+  describe("DELETE /shows/:show_id", () => {
     describe("with a valid :show_id", () => {
       test("with valid parameters", async () => {
         const show = await Show.findOne();
@@ -32,7 +31,8 @@ describe("shows endpoint", () => {
 
       test("responds with a show", async () => {
         const show = await Show.findOne({
-          attributes: {exclude: ['createdAt', 'updatedAt']}});
+          attributes: { exclude: ["createdAt", "updatedAt"] },
+        });
 
         const { body } = await request(app).delete(`/shows/${show.id}`);
 
@@ -50,5 +50,5 @@ describe("shows endpoint", () => {
         expect(statusCode).toBe(404);
       });
     });
-  // });
+  });
 });

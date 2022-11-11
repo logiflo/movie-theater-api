@@ -91,7 +91,12 @@ describe("users endpoint", () => {
         const { body } = await request(app).get(`/users/${user.id}/shows`);
 
         expect(Array.isArray(body)).toBe(true);
-        expect(body.every(({ title, genre, rating, status }) => title && genre && rating && status));
+        expect(
+          body.every(
+            ({ title, genre, rating, status }) =>
+              title && genre && rating && status
+          )
+        );
       });
     });
 
