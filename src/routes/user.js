@@ -7,6 +7,8 @@ const { getUserById, checkRating } = require("../middleware");
 
 userRouter.get("/", async (request, response) => {
   const allUsers = await User.findAll();
+  if (!allUsers.length) return response.sendStatus(404);
+
   response.send(allUsers);
 });
 

@@ -6,6 +6,8 @@ const { getShowById, getShowByGenre, updateStatus } = require("../middleware");
 
 showRouter.get("/", async (request, response) => {
   const allShows = await Show.findAll();
+  if(!allShows.length) return response.sendStatus(404);
+
   response.send(allShows);
 });
 
