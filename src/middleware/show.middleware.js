@@ -11,7 +11,7 @@ async function getShowByGenre(request, response, next) {
   request.shows = await Show.findAll({
     where: { genre: request.params.genre },
   });
-  if (!request.shows.lenght) return response.sendStatus(404);
+  if (!request.shows.length) return response.sendStatus(404);
 
   next();
 }
