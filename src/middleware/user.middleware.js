@@ -8,14 +8,10 @@ async function getUserById(request, response, next) {
 }
 
 function checkRating(request, response, next) {
-  if (!request.body.rating || request.body.rating === " ") {
-    return response
-      .status(400)
-      .send("Rating field cannot be empty or contain whitespace");
-  }
+  const rating = request.body.rating;
 
-  if (request.body.rating < 0 || request.body.rating > 5) {
-    return response.status(400).send("Rating must be between 0 and 5");
+  if (typeof rating !== "number" || rating < 0 || rating > 5) {
+    return response.status(400).send("Rating must be a number between 0 and 5");
   }
 
   next();
