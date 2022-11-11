@@ -26,4 +26,32 @@ async function updateStatus(request, response, next) {
   next();
 }
 
-module.exports = { getShowById, getShowByGenre, updateStatus };
+function checkRating(request, response, next) {
+  const rating = request.body.rating;
+
+  if (typeof rating !== "number" || rating < 0 || rating > 5) {
+    return response.status(400).send("Rating must be a number between 0 and 5");
+  }
+
+  next();
+}
+
+function isAllShowData(body) {
+  if (!body.title || !body.genre || !body.status) {
+    return false;
+  }
+
+  if (body.status in ["cancelled", "on-going"]) {
+    return response.status(400).send("Status must be cancelled or on-going");
+  }
+
+  return true;
+}
+
+module.exports = {
+  getShowById,
+  getShowByGenre,
+  updateStatus,
+  checkRating,
+  isAllShowData,
+};

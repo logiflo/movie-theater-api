@@ -1,8 +1,10 @@
-const { getUserById, checkRating } = require("./user.middleware");
+const { getUserById, checkUserShows } = require("./user.middleware");
 const {
   getShowById,
   getShowByGenre,
   updateStatus,
+  checkRating,
+  isAllShowData,
 } = require("./show.middleware");
 
 module.exports = {
@@ -11,4 +13,6 @@ module.exports = {
   getShowById,
   getShowByGenre,
   updateStatus,
+  checkUserShows,
+  isAllShowData,
 };
