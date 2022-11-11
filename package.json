@@ -19,5 +19,8 @@
   "repository": {
     "type": "git",
     "url": "git@github_personal:logiflo/movie-theater-api.git"
+  },
+  "devDependencies": {
+    "supertest": "^6.3.1"
   }
 }
