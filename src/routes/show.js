@@ -2,7 +2,7 @@ const { Router } = require("express");
 const showRouter = Router();
 
 const { Show } = require("../models");
-const { getShowById, getShowByGenre, updateStatus } = require("../middleware");
+const { getShowById, getShowByGenre, updateStatus, checkRating } = require("../middleware");
 
 showRouter.get("/", async (request, response) => {
   const allShows = await Show.findAll();
@@ -19,7 +19,7 @@ showRouter.get("/genres/:genre", getShowByGenre, async (request, response) => {
   response.send(request.shows);
 });
 
-showRouter.put("/:show_id/watched", getShowById, async (request, response) => {
+showRouter.put("/:show_id/watched",checkRating, getShowById, async (request, response) => {
   await request.show.update(request.body);
   response.status(201).send(request.show);
 });
