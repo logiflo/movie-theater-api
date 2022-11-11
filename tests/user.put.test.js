@@ -89,5 +89,64 @@ describe("users endpoint", () => {
         expect(statusCode).toBe(400);
       });
     });
+
+    describe("create a show", () => {
+      test("success", async () => {
+        const user = await User.findOne();
+        const userShows = await user.getShows();
+
+        const { statusCode } = await request(app)
+          .put(`/users/${user.id}/shows/${userShows.length + 1}`)
+          .send({ title: "title", genre:"Drama", status: "cancelled" });
+
+        expect(statusCode).toBe(201);
+      });
+
+      test("fails with Bad Request if missing title", async () => {
+        const user = await User.findOne();
+        const userShows = await user.getShows();
+
+        const { statusCode } = await request(app)
+          .put(`/users/${user.id}/shows/${userShows.length + 1}`)
+          .send({ genre:"Drama", status: "cancelled" });
+
+        expect(statusCode).toBe(400);
+      });
+
+      test("fails with Bad Request if missing genre", async () => {
+        const user = await User.findOne();
+        const userShows = await user.getShows();
+
+        const { statusCode } = await request(app)
+          .put(`/users/${user.id}/shows/${userShows.length + 1}`)
+          .send({ title: "title", status: "cancelled" });
+
+        expect(statusCode).toBe(400);
+      });
+
+      test("fails with Bad Request if missing status", async () => {
+        const user = await User.findOne();
+        const userShows = await user.getShows();
+
+        const { statusCode } = await request(app)
+          .put(`/users/${user.id}/shows/${userShows.length + 1}`)
+          .send({ title: "title", genre:"Drama" });
+
+        expect(statusCode).toBe(400);
+      });
+
+      test("fails with Bad Request if status is not cancelled or on-going", async () => {
+        const user = await User.findOne();
+        const userShows = await user.getShows();
+
+        const { statusCode } = await request(app)
+          .put(`/users/${user.id}/shows/${userShows.length + 1}`)
+          .send({ title: "title", genre:"Drama", status: "hh" });
+
+        expect(statusCode).toBe(400);
+      });
+    });
+
+
   });
 });
