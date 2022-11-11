@@ -41,10 +41,6 @@ function isAllShowData(body) {
     return false;
   }
 
-  if (body.status in ["cancelled", "on-going"]) {
-    return response.status(400).send("Status must be cancelled or on-going");
-  }
-
   return true;
 }
 

@@ -18,6 +18,10 @@ async function checkUserShows(request, response, next) {
       return response.status(400).send(errorMsg);
     }
 
+    if (!["cancelled", "on-going"].includes(request.body.status)) {
+      return response.status(400).send("Status must be cancelled or on-going");
+    }
+
     const show = await Show.create(request.body);
     await request.user.addShow(show);
     return response.status(201).send(show);
