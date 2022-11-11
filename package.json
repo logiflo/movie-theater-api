@@ -4,8 +4,9 @@
   "description": "Movie Theater Project for Express",
   "main": "db.js",
   "scripts": {
-    "test": "jest",
-    "test:user": "jest tests/user --verbose",
+    "test": "jest --verbose --silent --runInBand",
+    "test:user": "jest tests/user --verbose --silent --runInBand",
+    "test:show": "jest tests/show --verbose --silent --runInBand",
     "start": "nodemon src/server.js"
   },
   "author": "",
