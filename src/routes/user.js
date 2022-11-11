@@ -3,7 +3,7 @@ const userRouter = Router();
 
 const { User } = require("../models");
 
-const { getUserById, checkRating, checkUserShows } = require("../middleware");
+const { getUserById, checkUserShows } = require("../middleware");
 
 userRouter.get("/", async (request, response) => {
   const allUsers = await User.findAll();
