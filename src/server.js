@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const seed = require("./db/seed");
 const { userRouter, showRouter } = require("./routes");
+const cors = require('cors')
+
+app.use(cors());
 
 app.use(express.json());
 

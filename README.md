@@ -7,23 +7,30 @@ Movie Theater Project for Express Week Day 5
 $ npm install
 ```
 
-## Running the application
-To start the application
+## Start the server
+To start the server
 
 ```bash
 $ npm run start
 ```
-## Running Tests
-To run tests
 
+## Host the web app
+To host the web app
 ```bash
-$ npm test
+$ npm run web
 ```
 
-But the following lines in server.js should be commented:
+## Running Tests
+To run tests, stop both web app and server.
+
+Comment the following lines in server.js:
 ```javascript
 // app.listen(5001, () => {
 //   seed();
 //   console.log("Listening on port 5001");
 // });
+```
+
+```bash
+$ npm test
 ```
